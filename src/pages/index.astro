@@ -1,4 +1,5 @@
 ---
+// imports
 import AuthorCard from '@/components/AuthorCard.astro'
 import BlogCard from '@/components/BlogCard.astro'
 import Link from '@/components/Link.astro'
@@ -6,51 +7,45 @@ import PageHead from '@/components/PageHead.astro'
 import { buttonVariants } from '@/components/ui/button'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
-import { getRecentPosts } from '@/lib/data-utils'
+import { getRecentPosts, getAllAuthors } from '@/lib/data-utils'
 
+// data
 const blog = await getRecentPosts(SITE.featuredPostCount)
+const authors = await getAllAuthors()
 ---
 
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="Home" />
+
   <section class="rounded-lg border">
+    <!-- Author list -->
     <ul class="flex flex-col gap-4">
-        {authors.map((author) => (
-          <li>
-            <AuthorCard author={author} />
-          </li>
-        ))}
-      </ul>
+      {authors.map((author) => (
+        <li>
+          <AuthorCard author={author} />
+        </li>
+      ))}
+    </ul>
+
     <div class="flex flex-col space-y-1.5 p-6">
-      <ul class="flex flex-col gap-4">
-        {authors.map((author) => (
-          <li>
-            <AuthorCard author={author} />
-          </li>
-        ))}
-      </ul>
       <h3 class="text-3xl leading-none font-medium">no·pal</h3>
       <p class="text-muted-foreground text-sm">
         /ˈnōp(ə)/ &bull; <span class="font-medium">noun</span>
       </p>
     </div>
+
     <div class="p-6 pt-0">
       <p class="text-muted-foreground mb-2 text-sm">
         Welcome to my personal space where I explore and celebrate the art that 
-        moves me. From the pages of novels and manga to the frames of webtoons 
-        and comics, from immersive game worlds to the diverse sounds of music—both 
-        underground and mainstream—this is where I share my thoughts, reviews, 
-        and reflections.
+        moves me...
       </p>
       <p class="text-muted-foreground text-sm">
-        Whether you're here for book recommendations, game analyses, music 
-        discoveries, or simply to explore different forms of creative expression, 
-        I hope you find something that resonates. Written in both <span class="text-foreground font-medium">English</span> 
-        and <span class="text-foreground font-medium">Indonesian</span>, because 
-        art knows no language barriers.
+        Whether you're here for book recommendations... Written in both <span class="text-foreground font-medium">English</span> 
+        and <span class="text-foreground font-medium">Indonesian</span>.
       </p>
     </div>
   </section>
+
   <section class="flex flex-col gap-y-4">
     <div class="flex flex-col">
       <h2 class="text-3xl leading-none font-medium mb-[0px]">latest</h2>
@@ -58,15 +53,15 @@ const blog = await getRecentPosts(SITE.featuredPostCount)
         /ˈlādəst/ &bull; <span class="font-medium">noun</span>
       </p>
     </div>
+
     <ul class="flex flex-col gap-y-4">
-      {
-        blog.map((post) => (
-          <li>
-            <BlogCard entry={post} />
-          </li>
-        ))
-      }
+      {blog.map((post) => (
+        <li>
+          <BlogCard entry={post} />
+        </li>
+      ))}
     </ul>
+
     <div class="flex justify-center">
       <Link
         href="/blog"
