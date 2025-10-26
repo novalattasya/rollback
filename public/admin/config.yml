@@ -3,7 +3,7 @@ backend:
   name: git-gateway
   branch: main
 
-# Media: simpan media di folder per-post (jika Decap/Netlify CMS kalian mendukung {{slug}})
+# Media: simpan media di folder per-post di dalam src/content/blog/{{slug}}
 media_folder: "src/content/blog/{{slug}}"
 public_folder: "/src/content/blog/{{slug}}"
 
@@ -11,16 +11,15 @@ public_folder: "/src/content/blog/{{slug}}"
 site_url: "https://nopal.site"
 
 collections:
-  # Blog posts — membuat folder per-slug dan file index.mdx
   - name: "blog"
     label: "📝 Blog Posts"
     label_singular: "Blog Post"
-    folder: "content/blog"
+    folder: "src/content/blog"
     create: true
     delete: true
     slug: "{{slug}}/index"
     extension: "mdx"
-    format: "frontmatter"    # <-- penting: tambahkan ini
+    format: "frontmatter"
     preview_path: ""
     editor:
       preview: true
@@ -55,7 +54,7 @@ collections:
         required: false
         hint: |
           Upload banner image. The CMS is configured to store uploads in the post folder:
-          /src/content/blog/<slug>/ if your CMS supports {{slug}} in media_folder.
+          src/content/blog/<slug>/ if your CMS supports {{slug}} in media_folder.
 
       - label: "Tags"
         name: "tags"
@@ -68,7 +67,7 @@ collections:
         name: "authors"
         widget: "list"
         required: false
-        hint: "Use author IDs from content/authors/ (e.g., enscribe)"
+        hint: "Use author IDs from src/content/authors/ (e.g., enscribe)"
         default: ["enscribe"]
 
       - label: "Draft"
@@ -83,7 +82,6 @@ collections:
         widget: "markdown"
         hint: "Main content of your blog post (supports MDX)"
 
-  # Authors collection
   - name: "authors"
     label: "👤 Authors"
     label_singular: "Author"
@@ -152,7 +150,6 @@ collections:
         required: false
         hint: "Extended bio or information"
 
-  # Projects collection
   - name: "projects"
     label: "🚀 Projects"
     label_singular: "Project"
@@ -181,7 +178,7 @@ collections:
       - label: "Project Image"
         name: "image"
         widget: "image"
-        hint: "Upload an image for the project. Stored in content/projects/<slug>/ if supported."
+        hint: "Upload an image for the project. Stored in src/content/projects/<slug>/ if supported."
 
       - label: "Project Link"
         name: "link"
@@ -210,3 +207,6 @@ collections:
         widget: "markdown"
         required: false
         hint: "Detailed project description"
+
+# Optional:
+# publish_mode: editorial_workflow
