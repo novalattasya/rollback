@@ -1,7 +1,7 @@
 ---
 name: 'Nopal'
 pronouns: 'he/him'
-avatar: 'https://raw.githubusercontent.com/jktrn/astro-erudite/refs/heads/main/public/static/profile.webp'
+avatar: 'https://gravatar.com/avatar/4840662bf2290a926ec6d7148960f0a396c5a668341dfdbe34f9f30b62cdb6af.webp?size=256'
 bio: 'Penyihir, Sejak 1890'
 website: 'https://nopal.site'
 instagram: 'https://instagram.com/5nopal'
