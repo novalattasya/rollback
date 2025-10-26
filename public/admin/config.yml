@@ -3,7 +3,7 @@ backend:
   branch: main
   
 media_folder: "public/upload"
-public_folder: "public/upload"
+public_folder: "/upload"
 site_url: "https://nopal.site"
 
 collections:
