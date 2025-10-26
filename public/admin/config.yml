@@ -1,26 +1,27 @@
+# Backend: Netlify Identity + Git Gateway
 backend:
   name: git-gateway
   branch: main
+
+# Media: simpan media di folder per-post (jika Decap/Netlify CMS kalian mendukung {{slug}})
 media_folder: "content/blog/{{slug}}"
 public_folder: "/content/blog/{{slug}}"
 
-# Site metadata
+# Optional
 site_url: "https://nopal.site"
 
-# Collections
 collections:
-  # ========================================
-  # Blog Posts Collection
-  # ========================================
+  # Blog posts — membuat folder per-slug dan file index.mdx
   - name: "blog"
     label: "📝 Blog Posts"
     label_singular: "Blog Post"
-    folder: "content/blog"       # parent directory; actual file will be content/blog/<slug>/index.mdx
+    folder: "content/blog"
     create: true
     delete: true
-    slug: "{{slug}}/index"       # TRICK: membuat folder <slug> dan file index
-    extension: "mdx"             # hasil file: index.mdx
-    preview_path: ""             # biarkan kosong atau sesuaikan jika perlu preview route
+    slug: "{{slug}}/index"
+    extension: "mdx"
+    format: "frontmatter"    # <-- penting: tambahkan ini
+    preview_path: ""
     editor:
       preview: true
     fields:
@@ -54,10 +55,7 @@ collections:
         required: false
         hint: |
           Upload banner image. The CMS is configured to store uploads in the post folder:
-          content/blog/<slug>/. If your Decap/Netlify CMS version supports {{slug}} in media_folder,
-          uploaded image will be saved as content/blog/<slug>/banner.png and frontmatter will contain
-          either an absolute path like /content/blog/<slug>/banner.png or a relative filename depending on
-          your CMS behavior.
+          content/blog/<slug>/ if your CMS supports {{slug}} in media_folder.
 
       - label: "Tags"
         name: "tags"
@@ -85,9 +83,7 @@ collections:
         widget: "markdown"
         hint: "Main content of your blog post (supports MDX)"
 
-  # ========================================
-  # Authors Collection
-  # ========================================
+  # Authors collection
   - name: "authors"
     label: "👤 Authors"
     label_singular: "Author"
@@ -95,6 +91,7 @@ collections:
     create: true
     delete: true
     slug: "{{slug}}"
+    format: "frontmatter"
     identifier_field: "name"
     editor:
       preview: false
@@ -155,9 +152,7 @@ collections:
         required: false
         hint: "Extended bio or information"
 
-  # ========================================
-  # Projects Collection
-  # ========================================
+  # Projects collection
   - name: "projects"
     label: "🚀 Projects"
     label_singular: "Project"
@@ -165,6 +160,7 @@ collections:
     create: true
     delete: true
     slug: "{{slug}}"
+    format: "frontmatter"
     identifier_field: "name"
     editor:
       preview: false
