@@ -3,11 +3,12 @@ backend:
   name: git-gateway
   branch: main
 
-# Media: simpan media di folder per-post di dalam src/content/blog/{{slug}}
-media_folder: "src/content/blog/{{slug}}"
-public_folder: "/src/content/blog/{{slug}}"
+# Global media folder (dipakai oleh media library global).
+# NOTE: kamu bisa set ini ke "src/content/blog" tetapi jika kamu pakai per-post media (collection media_folder: ""),
+# media library global masih bisa kosong. Kita set ke src/content/blog supaya Media tab bisa menampilkan sesuatu if needed.
+media_folder: "src/content/blog"
+public_folder: "/src/content/blog"
 
-# Optional
 site_url: "https://nopal.site"
 
 collections:
@@ -17,66 +18,60 @@ collections:
     folder: "src/content/blog"
     create: true
     delete: true
-    slug: "{{slug}}/index"
+    # Use path to create page-bundle (slug folder + index file)
+    path: "{{slug}}/index"
     extension: "mdx"
     format: "frontmatter"
     preview_path: ""
     editor:
       preview: true
+    # Per-collection media_folder: '' means "store media next to the entry (page bundle)"
+    media_folder: ""
+    public_folder: ""
     fields:
       - label: "Title"
         name: "title"
         widget: "string"
         hint: "Should be ≤60 characters"
-
       - label: "Description"
         name: "description"
         widget: "text"
         hint: "Should be ≤155 characters (for SEO)"
-
       - label: "Publish Date"
         name: "date"
         widget: "datetime"
         format: "YYYY-MM-DD"
         date_format: "YYYY-MM-DD"
         time_format: false
-
       - label: "Sort Order"
         name: "order"
         widget: "number"
         required: false
         hint: "Optional: Sort order for posts with same date"
         default: 0
-
       - label: "Banner Image"
         name: "image"
         widget: "image"
         required: false
-        hint: |
-          Upload banner image. The CMS is configured to store uploads in the post folder:
-          src/content/blog/<slug>/ if your CMS supports {{slug}} in media_folder.
-
+        hint: "Upload banner image — will be stored in the post folder and frontmatter set to the filename (e.g. banner.png)"
       - label: "Tags"
         name: "tags"
         widget: "list"
         required: false
         hint: "Use kebab-case (e.g., my-tag)"
         default: []
-
       - label: "Authors"
         name: "authors"
         widget: "list"
         required: false
         hint: "Use author IDs from src/content/authors/ (e.g., enscribe)"
         default: ["enscribe"]
-
       - label: "Draft"
         name: "draft"
         widget: "boolean"
         required: false
         default: false
         hint: "If true, post won't be published"
-
       - label: "Body"
         name: "body"
         widget: "markdown"
@@ -97,58 +92,44 @@ collections:
       - label: "Name"
         name: "name"
         widget: "string"
-
       - label: "Avatar URL"
         name: "avatar"
         widget: "string"
         hint: "URL or path starting with /. Use Gravatar with ?size=256"
-
       - label: "Bio"
         name: "bio"
         widget: "text"
         required: false
-
       - label: "Email"
         name: "mail"
         widget: "string"
         required: false
         hint: "Must be valid email"
-
       - label: "Website"
         name: "website"
         widget: "string"
         required: false
         hint: "Must be valid URL"
-
       - label: "Twitter"
         name: "twitter"
         widget: "string"
         required: false
-        hint: "Full URL (e.g., https://twitter.com/username)"
-
       - label: "GitHub"
         name: "github"
         widget: "string"
         required: false
-        hint: "Full URL (e.g., https://github.com/username)"
-
       - label: "LinkedIn"
         name: "linkedin"
         widget: "string"
         required: false
-        hint: "Full URL"
-
       - label: "Discord"
         name: "discord"
         widget: "string"
         required: false
-        hint: "Full URL"
-
       - label: "Body"
         name: "body"
         widget: "markdown"
         required: false
-        hint: "Extended bio or information"
 
   - name: "projects"
     label: "🚀 Projects"
@@ -165,26 +146,21 @@ collections:
       - label: "Project Name"
         name: "name"
         widget: "string"
-
       - label: "Description"
         name: "description"
         widget: "text"
-
       - label: "Tags"
         name: "tags"
         widget: "list"
         hint: "Technologies, frameworks, etc."
-
       - label: "Project Image"
         name: "image"
         widget: "image"
         hint: "Upload an image for the project. Stored in src/content/projects/<slug>/ if supported."
-
       - label: "Project Link"
         name: "link"
         widget: "string"
         hint: "Must be valid URL"
-
       - label: "Start Date"
         name: "startDate"
         widget: "datetime"
@@ -192,7 +168,6 @@ collections:
         date_format: "YYYY-MM-DD"
         time_format: false
         required: false
-
       - label: "End Date"
         name: "endDate"
         widget: "datetime"
@@ -201,7 +176,6 @@ collections:
         time_format: false
         required: false
         hint: "Leave empty if project is ongoing"
-
       - label: "Body"
         name: "body"
         widget: "markdown"
