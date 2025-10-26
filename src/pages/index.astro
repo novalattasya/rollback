@@ -1,5 +1,4 @@
 ---
-// imports
 import AuthorCard from '@/components/AuthorCard.astro'
 import BlogCard from '@/components/BlogCard.astro'
 import Link from '@/components/Link.astro'
@@ -9,7 +8,6 @@ import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getRecentPosts, getAllAuthors } from '@/lib/data-utils'
 
-// data
 const blog = await getRecentPosts(SITE.featuredPostCount)
 const authors = await getAllAuthors()
 ---
@@ -17,8 +15,7 @@ const authors = await getAllAuthors()
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="Home" />
 
-  <section class="rounded-lg border">
-    <!-- Author list -->
+  <section>
     <ul class="flex flex-col gap-4">
       {authors.map((author) => (
         <li>
@@ -36,12 +33,15 @@ const authors = await getAllAuthors()
 
     <div class="p-6 pt-0">
       <p class="text-muted-foreground mb-2 text-sm">
-        Welcome to my personal space where I explore and celebrate the art that 
-        moves me...
+        So, my name’s kinda like that cactus from <Link
+          href="https://en.wikipedia.org/wiki/Nopal"
+          class="text-foreground"
+          external
+          underline>Mexico</Link
+        >. Don’t really know what I’ve got in common with a cactus—maybe the whole  <span class="text-foreground font-medium">“tough and patient”</span> thing? Haha, sounds a bit extra, huh?
       </p>
       <p class="text-muted-foreground text-sm">
-        Whether you're here for book recommendations... Written in both <span class="text-foreground font-medium">English</span> 
-        and <span class="text-foreground font-medium">Indonesian</span>.
+        Anyway, whatever my name means <em>(or doesn’t)</em>, this blog’s basically my personal space to spill thoughts, opinions, and random stuff I’m into.
       </p>
     </div>
   </section>
