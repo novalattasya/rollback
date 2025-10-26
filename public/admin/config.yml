@@ -43,6 +43,10 @@ collections:
       - label: "Banner Image"
         name: "image"
         widget: "image"
+        media_library:
+          config:
+            media_folder: "public/upload"
+            public_folder: "/upload"
         required: false
         hint: "Upload banner image — will be stored in the post folder and frontmatter set to the filename (e.g. banner.png)"
       - label: "Tags"
