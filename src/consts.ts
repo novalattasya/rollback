@@ -1,9 +1,9 @@
 import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
-  title: 'nopal-blog',
+  title: 'Nopal',
   description:
-    'Nopal-blog is a personal space where I share my thoughts on novels, manga, webtoons, comics, games, music—from underground gems to mainstream hits—and all things art. Written in both English and Indonesian.',
+    'Apersonal space where  I share my thoughts on novels, manga, webtoons, comics, games, music—from underground gems to mainstream hits—and all things art. Written in both English and Indonesian.',
   href: 'https://nopal.site',
   author: 'novalattasya',
   locale: 'en-US',
