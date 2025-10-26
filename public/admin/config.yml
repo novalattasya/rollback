@@ -1,16 +1,11 @@
-# Backend Configuration
 backend:
   name: git-gateway
-  repo: novalattasya/rollback
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
-# Optional: Editorial Workflow (Draft → Review → Publish)
-# publish_mode: editorial_workflow
+media_folder: "content/blog/{{slug}}"
+public_folder: "/content/blog/{{slug}}"
 
-# Media Files
-media_folder: "public/images/blog"
-public_folder: "/images/blog"
+# Site metadata
+site_url: "https://nopal.site"
 
 # Collections
 collections:
@@ -20,10 +15,12 @@ collections:
   - name: "blog"
     label: "📝 Blog Posts"
     label_singular: "Blog Post"
-    folder: "src/content/blog"
+    folder: "content/blog"       # parent directory; actual file will be content/blog/<slug>/index.mdx
     create: true
     delete: true
-    slug: "{{slug}}"
+    slug: "{{slug}}/index"       # TRICK: membuat folder <slug> dan file index
+    extension: "mdx"             # hasil file: index.mdx
+    preview_path: ""             # biarkan kosong atau sesuaikan jika perlu preview route
     editor:
       preview: true
     fields:
@@ -31,53 +28,58 @@ collections:
         name: "title"
         widget: "string"
         hint: "Should be ≤60 characters"
-        
+
       - label: "Description"
         name: "description"
         widget: "text"
         hint: "Should be ≤155 characters (for SEO)"
-        
+
       - label: "Publish Date"
         name: "date"
         widget: "datetime"
         format: "YYYY-MM-DD"
         date_format: "YYYY-MM-DD"
         time_format: false
-        
+
       - label: "Sort Order"
         name: "order"
         widget: "number"
         required: false
         hint: "Optional: Sort order for posts with same date"
         default: 0
-        
+
       - label: "Banner Image"
         name: "image"
         widget: "image"
         required: false
-        hint: "Should be exactly 1200px × 630px"
-        
+        hint: |
+          Upload banner image. The CMS is configured to store uploads in the post folder:
+          content/blog/<slug>/. If your Decap/Netlify CMS version supports {{slug}} in media_folder,
+          uploaded image will be saved as content/blog/<slug>/banner.png and frontmatter will contain
+          either an absolute path like /content/blog/<slug>/banner.png or a relative filename depending on
+          your CMS behavior.
+
       - label: "Tags"
         name: "tags"
         widget: "list"
         required: false
         hint: "Use kebab-case (e.g., my-tag)"
         default: []
-        
+
       - label: "Authors"
         name: "authors"
         widget: "list"
         required: false
-        hint: "Use author IDs from src/content/authors/ (e.g., jane-doe)"
+        hint: "Use author IDs from content/authors/ (e.g., enscribe)"
         default: ["enscribe"]
-        
+
       - label: "Draft"
         name: "draft"
         widget: "boolean"
         required: false
         default: false
         hint: "If true, post won't be published"
-        
+
       - label: "Body"
         name: "body"
         widget: "markdown"
@@ -89,7 +91,7 @@ collections:
   - name: "authors"
     label: "👤 Authors"
     label_singular: "Author"
-    folder: "src/content/authors"
+    folder: "content/authors"
     create: true
     delete: true
     slug: "{{slug}}"
@@ -100,53 +102,53 @@ collections:
       - label: "Name"
         name: "name"
         widget: "string"
-        
+
       - label: "Avatar URL"
         name: "avatar"
         widget: "string"
         hint: "URL or path starting with /. Use Gravatar with ?size=256"
-        
+
       - label: "Bio"
         name: "bio"
         widget: "text"
         required: false
-        
+
       - label: "Email"
         name: "mail"
         widget: "string"
         required: false
         hint: "Must be valid email"
-        
+
       - label: "Website"
         name: "website"
         widget: "string"
         required: false
         hint: "Must be valid URL"
-        
+
       - label: "Twitter"
         name: "twitter"
         widget: "string"
         required: false
         hint: "Full URL (e.g., https://twitter.com/username)"
-        
+
       - label: "GitHub"
         name: "github"
         widget: "string"
         required: false
         hint: "Full URL (e.g., https://github.com/username)"
-        
+
       - label: "LinkedIn"
         name: "linkedin"
         widget: "string"
         required: false
         hint: "Full URL"
-        
+
       - label: "Discord"
         name: "discord"
         widget: "string"
         required: false
         hint: "Full URL"
-        
+
       - label: "Body"
         name: "body"
         widget: "markdown"
@@ -159,7 +161,7 @@ collections:
   - name: "projects"
     label: "🚀 Projects"
     label_singular: "Project"
-    folder: "src/content/projects"
+    folder: "content/projects"
     create: true
     delete: true
     slug: "{{slug}}"
@@ -170,26 +172,26 @@ collections:
       - label: "Project Name"
         name: "name"
         widget: "string"
-        
+
       - label: "Description"
         name: "description"
         widget: "text"
-        
+
       - label: "Tags"
         name: "tags"
         widget: "list"
         hint: "Technologies, frameworks, etc."
-        
+
       - label: "Project Image"
         name: "image"
         widget: "image"
-        hint: "Should be exactly 1200px × 630px"
-        
+        hint: "Upload an image for the project. Stored in content/projects/<slug>/ if supported."
+
       - label: "Project Link"
         name: "link"
         widget: "string"
         hint: "Must be valid URL"
-        
+
       - label: "Start Date"
         name: "startDate"
         widget: "datetime"
@@ -197,7 +199,7 @@ collections:
         date_format: "YYYY-MM-DD"
         time_format: false
         required: false
-        
+
       - label: "End Date"
         name: "endDate"
         widget: "datetime"
@@ -206,7 +208,7 @@ collections:
         time_format: false
         required: false
         hint: "Leave empty if project is ongoing"
-        
+
       - label: "Body"
         name: "body"
         widget: "markdown"
