@@ -16,25 +16,21 @@ const projects = await getAllProjects()
   <section>
     <div class="min-w-full">
       <div class="prose mb-8">
-        <h1 class="text-3xl font-bold mb-4">Hi, I'm Nopal!</h1>
+        <h1 class="text-3xl font-bold mb-4">I'm Nopal.</h1>
         <p class="mt-0">
-          Welcome to my personal space where I share my thoughts on novels, manga, webtoons, 
-          comics, games, music—from underground gems to mainstream hits—and all things art. 
-          I write in both English and Indonesian, exploring the creative works that inspire 
-          and move me.
+          This is my spot — a digital dump of thoughts, vibes, and creative chaos. 
         </p>
         <p>
-          This blog is my canvas for expressing ideas, reviews, and reflections on the 
-          stories we consume, the games we play, and the music that shapes our experiences. 
-          Whether it's a hidden indie gem or a blockbuster phenomenon, if it's art, 
-          it belongs here.
+          I talk about whatever hits: novels, manga, webtoons, comics, games, music — from underground noise to chart-topping stuff. I switch between English and Indonesian, depending on what feels right.
+        </p>
+        <p>
+          This blog ain’t about reviews or ratings — it’s about <span class="text-foreground font-medium"><em>”vibes”</em></span>. The stories we binge, the games that wreck our sleep schedule, the tracks that mess with our heads — all that good stuff. If it’s art and it slaps, it lives here.
         </p>
       </div>
 
       <h2 class="mb-4 text-2xl font-medium">My Creative Works</h2>
       <p class="prose mb-6">
-        Beyond writing about art, I also create. Here are some of my personal projects 
-        and creative endeavors:
+        I don’t just talk about art — I make it. Here’s where I drop my projects, ideas, and the random things I cook up when inspiration hits at 3AM.
       </p>
       <div class="flex flex-col gap-4">
         {projects.map((project) => <ProjectCard project={project} />)}
