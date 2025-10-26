@@ -1,31 +1,25 @@
-# Backend: Netlify Identity + Git Gateway
 backend:
   name: git-gateway
   branch: main
-
-# Global media folder (dipakai oleh media library global).
-# NOTE: kamu bisa set ini ke "src/content/blog" tetapi jika kamu pakai per-post media (collection media_folder: ""),
-# media library global masih bisa kosong. Kita set ke src/content/blog supaya Media tab bisa menampilkan sesuatu if needed.
-media_folder: "src/content/blog"
-public_folder: "/src/content/blog"
+  
+media_folder: "public/upload"
+public_folder: "/public/ubload"
 
 site_url: "https://nopal.site"
 
 collections:
   - name: "blog"
-    label: "📝 Blog Posts"
-    label_singular: "Blog Post"
+    label: "📝 Blog"
+    label_singular: "Blog"
     folder: "src/content/blog"
     create: true
     delete: true
-    # Use path to create page-bundle (slug folder + index file)
     path: "{{slug}}/index"
     extension: "mdx"
     format: "frontmatter"
     preview_path: ""
     editor:
       preview: true
-    # Per-collection media_folder: '' means "store media next to the entry (page bundle)"
     media_folder: ""
     public_folder: ""
     fields:
@@ -65,7 +59,7 @@ collections:
         widget: "list"
         required: false
         hint: "Use author IDs from src/content/authors/ (e.g., enscribe)"
-        default: ["enscribe"]
+        default: ["nopal"]
       - label: "Draft"
         name: "draft"
         widget: "boolean"
