@@ -19,8 +19,8 @@ collections:
     preview_path: ""
     editor:
       preview: true
-    media_folder: ""
-    public_folder: ""
+    media_folder: "public/upload"
+    public_folder: "/upload"
     fields:
       - label: "Title"
         name: "title"
