@@ -4,8 +4,8 @@ backend:
   branch: main
 
 # Media: simpan media di folder per-post (jika Decap/Netlify CMS kalian mendukung {{slug}})
-media_folder: "content/blog/{{slug}}"
-public_folder: "/content/blog/{{slug}}"
+media_folder: "src/content/blog/{{slug}}"
+public_folder: "/src/content/blog/{{slug}}"
 
 # Optional
 site_url: "https://nopal.site"
@@ -55,7 +55,7 @@ collections:
         required: false
         hint: |
           Upload banner image. The CMS is configured to store uploads in the post folder:
-          content/blog/<slug>/ if your CMS supports {{slug}} in media_folder.
+          /src/content/blog/<slug>/ if your CMS supports {{slug}} in media_folder.
 
       - label: "Tags"
         name: "tags"
@@ -87,7 +87,7 @@ collections:
   - name: "authors"
     label: "👤 Authors"
     label_singular: "Author"
-    folder: "content/authors"
+    folder: "src/content/authors"
     create: true
     delete: true
     slug: "{{slug}}"
@@ -156,7 +156,7 @@ collections:
   - name: "projects"
     label: "🚀 Projects"
     label_singular: "Project"
-    folder: "content/projects"
+    folder: "src/content/projects"
     create: true
     delete: true
     slug: "{{slug}}"
