@@ -1,0 +1,213 @@
+# Backend Configuration
+backend:
+  name: github
+  repo: novalattasya/rollback
+  branch: main
+
+# Optional: Editorial Workflow (Draft → Review → Publish)
+# publish_mode: editorial_workflow
+
+# Media Files
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+# Collections
+collections:
+  # ========================================
+  # Blog Posts Collection
+  # ========================================
+  - name: "blog"
+    label: "📝 Blog Posts"
+    label_singular: "Blog Post"
+    folder: "src/content/blog"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        hint: "Should be ≤60 characters"
+        
+      - label: "Description"
+        name: "description"
+        widget: "text"
+        hint: "Should be ≤155 characters (for SEO)"
+        
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        
+      - label: "Sort Order"
+        name: "order"
+        widget: "number"
+        required: false
+        hint: "Optional: Sort order for posts with same date"
+        default: 0
+        
+      - label: "Banner Image"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "Should be exactly 1200px × 630px"
+        
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+        hint: "Use kebab-case (e.g., my-tag)"
+        default: []
+        
+      - label: "Authors"
+        name: "authors"
+        widget: "list"
+        required: false
+        hint: "Use author IDs from src/content/authors/ (e.g., jane-doe)"
+        default: ["enscribe"]
+        
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        required: false
+        default: false
+        hint: "If true, post won't be published"
+        
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        hint: "Main content of your blog post (supports MDX)"
+
+  # ========================================
+  # Authors Collection
+  # ========================================
+  - name: "authors"
+    label: "👤 Authors"
+    label_singular: "Author"
+    folder: "src/content/authors"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: "name"
+    editor:
+      preview: false
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: "string"
+        
+      - label: "Avatar URL"
+        name: "avatar"
+        widget: "string"
+        hint: "URL or path starting with /. Use Gravatar with ?size=256"
+        
+      - label: "Bio"
+        name: "bio"
+        widget: "text"
+        required: false
+        
+      - label: "Email"
+        name: "mail"
+        widget: "string"
+        required: false
+        hint: "Must be valid email"
+        
+      - label: "Website"
+        name: "website"
+        widget: "string"
+        required: false
+        hint: "Must be valid URL"
+        
+      - label: "Twitter"
+        name: "twitter"
+        widget: "string"
+        required: false
+        hint: "Full URL (e.g., https://twitter.com/username)"
+        
+      - label: "GitHub"
+        name: "github"
+        widget: "string"
+        required: false
+        hint: "Full URL (e.g., https://github.com/username)"
+        
+      - label: "LinkedIn"
+        name: "linkedin"
+        widget: "string"
+        required: false
+        hint: "Full URL"
+        
+      - label: "Discord"
+        name: "discord"
+        widget: "string"
+        required: false
+        hint: "Full URL"
+        
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        required: false
+        hint: "Extended bio or information"
+
+  # ========================================
+  # Projects Collection
+  # ========================================
+  - name: "projects"
+    label: "🚀 Projects"
+    label_singular: "Project"
+    folder: "src/content/projects"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: "name"
+    editor:
+      preview: false
+    fields:
+      - label: "Project Name"
+        name: "name"
+        widget: "string"
+        
+      - label: "Description"
+        name: "description"
+        widget: "text"
+        
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        hint: "Technologies, frameworks, etc."
+        
+      - label: "Project Image"
+        name: "image"
+        widget: "image"
+        hint: "Should be exactly 1200px × 630px"
+        
+      - label: "Project Link"
+        name: "link"
+        widget: "string"
+        hint: "Must be valid URL"
+        
+      - label: "Start Date"
+        name: "startDate"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        required: false
+        
+      - label: "End Date"
+        name: "endDate"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        required: false
+        hint: "Leave empty if project is ongoing"
+        
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        required: false
+        hint: "Detailed project description"
