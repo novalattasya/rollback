@@ -8,16 +8,14 @@ import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getRecentPosts, getAllAuthors } from '@/lib/data-utils'
 
-const blog = await getRecentPosts(3) // Ubah jadi 3 post
+const blog = await getRecentPosts(3)
 const authors = await getAllAuthors()
 ---
 
 <Layout class="max-w-none w-full px-8 lg:px-16">
   <PageHead slot="head" title="Home" />
 
-  <!-- Profile Section: AuthorCard (Kiri) + Info (Kanan) -->
   <section class="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-12 mb-20 max-w-[1600px] mx-auto">
-    <!-- AuthorCard di Kiri -->
     <div class="flex flex-col gap-4">
       <ul class="flex flex-col gap-4">
         {authors.map((author) => (
@@ -28,7 +26,6 @@ const authors = await getAllAuthors()
       </ul>
     </div>
 
-    <!-- Info Profile di Kanan -->
     <div class="flex flex-col justify-center">
       <div class="flex flex-col space-y-1.5 mb-4">
         <h3 class="text-3xl leading-none font-medium">no·pal</h3>
@@ -53,7 +50,6 @@ const authors = await getAllAuthors()
     </div>
   </section>
 
-  <!-- Latest Posts Section: Full Width dengan Grid yang Lebih Lebar -->
   <section class="flex flex-col gap-y-6 max-w-[1600px] mx-auto w-full">
     <div class="flex flex-col">
       <h2 class="text-3xl leading-none font-medium mb-[0px]">latest</h2>
@@ -62,7 +58,6 @@ const authors = await getAllAuthors()
       </p>
     </div>
 
-    <!-- Grid 3 kolom dengan min-width yang lebih besar -->
     <ul class="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
       {blog.map((post) => (
         <li class="w-full">

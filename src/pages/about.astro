@@ -9,27 +9,28 @@ import { getAllProjects } from '@/lib/data-utils'
 const projects = await getAllProjects()
 ---
 
-<Layout class="max-w-3xl">
+<Layout class="max-w-none w-full px-8 lg:px-16">
   <PageHead slot="head" title="About" />
-  <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
+  <div class="max-w-[1600px] mx-auto w-full mb-8">
+    <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
+  </div>
 
   <section>
-    <div class="min-w-full">
-      <div class="prose mb-8">
-        <h1 class="text-3xl font-bold mb-4">I'm Nopal.</h1>
-        <p class="mt-0">
-          This is my spot — a digital dump of thoughts, vibes, and creative chaos. 
-        </p>
-        <p>
+    <div class="max-w-[1600px] mx-auto w-full mb-8">
+      <div class="flex flex-col">
+        <h1 class="text-3xl leading-none font-medium mb-[12px]">I'm Nopal.</h1>
+        <p class="text-muted-foreground mb-[0px]">
+          This is my spot — a digital dump of thoughts, vibes, and creative chaos.
+        <p class="text-muted-foreground mb-[0px]"> 
           I talk about whatever hits: novels, manga, webtoons, comics, games, music — from underground noise to chart-topping stuff. I switch between English and Indonesian, depending on what feels right.
         </p>
-        <p>
+        <p class="text-muted-foreground mb-[20px]">
           This blog ain’t about reviews or ratings — it’s about <span class="text-foreground font-medium"><em>”vibes”</em></span>. The stories we binge, the games that wreck our sleep schedule, the tracks that mess with our heads — all that good stuff. If it’s art and it slaps, it lives here.
         </p>
       </div>
 
-      <h2 class="mb-4 text-2xl font-medium">My Creative Works</h2>
-      <p class="prose mb-6">
+      <h1 class="text-3xl leading-none font-medium mb-[12px]">My Creative Works</h1>
+      <p class="text-muted-foreground mb-[12px]">
         I don’t just talk about art — I make it. Here’s where I drop my projects, ideas, and the random things I cook up when inspiration hits at 3AM.
       </p>
       <div class="flex flex-col gap-4">
