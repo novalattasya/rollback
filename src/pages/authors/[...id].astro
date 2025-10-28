@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllAuthors, getPostsByAuthor } from '@/lib/data-utils'
-import { Link } from '@/components/Link.astro' // opsional jika mau tombol "Lihat semua"
+import Link from '@/components/Link.astro'
 export async function getStaticPaths() {
   const authors = await getAllAuthors()
   return authors.map((author) => ({
@@ -50,7 +50,7 @@ const remainingPosts = authorPosts.slice(GRID_LIMIT)
         gridPosts.length > 0 ? (
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {gridPosts.map((post) => (
-              <article key={post.id} class="w-full">
+              <article class="w-full">
                 <BlogCard entry={post} />
               </article>
             ))}
@@ -66,7 +66,7 @@ const remainingPosts = authorPosts.slice(GRID_LIMIT)
             <h3 class="text-lg font-medium mb-4">Other posts</h3>
             <ul class="flex flex-col gap-4">
               {remainingPosts.map((post) => (
-                <li key={post.id}>
+                <li>
                   <BlogCard entry={post} />
                 </li>
               ))}
@@ -76,7 +76,6 @@ const remainingPosts = authorPosts.slice(GRID_LIMIT)
                 Lihat semua posts
               </Link>
             </div>
-            -->
           </div>
         )
       }
