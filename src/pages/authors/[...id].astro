@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllAuthors, getPostsByAuthor } from '@/lib/data-utils'
-
+import { Link } from '@/components/Link.astro' // opsional jika mau tombol "Lihat semua"
 export async function getStaticPaths() {
   const authors = await getAllAuthors()
   return authors.map((author) => ({
@@ -15,44 +15,71 @@ export async function getStaticPaths() {
 }
 
 const { author } = Astro.props
-const authorPosts = await getPostsByAuthor(author.id)
+const authorPosts = (await getPostsByAuthor(author.id)).filter((p) => !p.data.draft)
+const GRID_LIMIT = 9
+const gridPosts = authorPosts.slice(0, GRID_LIMIT)
+const remainingPosts = authorPosts.slice(GRID_LIMIT)
 ---
 
-<Layout class="max-w-3xl">
+<Layout class="max-w-none w-full px-8 lg:px-16">
   <PageHead
     slot="head"
     title={`${author.data.name} (Author)`}
     description={author.data.bio || `Profile of ${author.data.name}.`}
     noindex
   />
-  <Breadcrumbs
-    items={[
-      { href: '/authors', label: 'Authors', icon: 'lucide:users' },
-      { label: author.data.name, icon: 'lucide:user' },
-    ]}
-  />
 
-  <section>
-    <AuthorCard author={author} />
-  </section>
-  <section class="flex flex-col gap-y-4">
-    <h2 class="text-2xl font-medium">Posts by {author.data.name}</h2>
-    {
-      authorPosts.length > 0 ? (
-        <ul class="flex flex-col gap-4">
-          {authorPosts
-            .filter((post) => !post.data.draft)
-            .map((post) => (
-              <li>
+  <div class="max-w-[1600px] mx-auto w-full py-6">
+    <div class="mb-6">
+      <Breadcrumbs
+        items={[
+          { href: '/authors', label: 'Authors', icon: 'lucide:users' },
+          { label: author.data.name, icon: 'lucide:user' },
+        ]}
+      />
+    </div>
+    <section class="mb-8">
+      <AuthorCard author={author} />
+    </section>
+    <section class="mb-12">
+      <h2 class="text-3xl leading-none font-medium mb-[0px]">Posts by {author.data.name}</h2>
+      <p class="text-[0.72rem] leading-tight tracking-tight text-muted-foreground mb-[20px]">
+        /pōst/ &bull; <span class="font-medium">noun</span>
+      </p>
+      {
+        gridPosts.length > 0 ? (
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {gridPosts.map((post) => (
+              <article key={post.id} class="w-full">
                 <BlogCard entry={post} />
-              </li>
+              </article>
             ))}
-        </ul>
-      ) : (
-        <p class="text-muted-foreground">
-          No posts available from this author.
-        </p>
-      )
-    }
-  </section>
+          </div>
+        ) : (
+          <p class="text-muted-foreground">No posts available from this author.</p>
+        )
+      }
+
+      {
+        remainingPosts.length > 0 && (
+          <div class="mt-8">
+            <h3 class="text-lg font-medium mb-4">Other posts</h3>
+            <ul class="flex flex-col gap-4">
+              {remainingPosts.map((post) => (
+                <li key={post.id}>
+                  <BlogCard entry={post} />
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6">
+              <Link href={`/authors/${author.id}/all`} class="btn">
+                Lihat semua posts
+              </Link>
+            </div>
+            -->
+          </div>
+        )
+      }
+    </section>
+  </div>
 </Layout>
