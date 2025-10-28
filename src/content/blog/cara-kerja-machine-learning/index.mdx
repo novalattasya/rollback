@@ -39,17 +39,18 @@ Intinya, ML = <kbd>Data</kbd> + <kbd>Algoritma</kbd> + <kbd>Komputasi</kbd>
 | <kbd>**Loss Function**</kbd> | Cara mengukur seberapa “bodoh” AI saat ini |
 | <kbd>**Optimizer**</kbd> | Algoritma yang bantu AI jadi “lebih pintar” tiap langkah |
 
-<Callout variant="important">
-  Jadi cara kerja Machine Learning bukan diberi perintah kayak gini:
-  ```python name="python.py"
-  A = False
-  C = True
-  if A:
+<Callout variant='important'>
+Jadi cara kerja Machine Learning bukan diberi perintah kayak gini:
+```python del={1-8}
+A = False
+C = True
+if A:
     print("B terjadi")        # kalau A benar
-    elif C:
+elif C:
     print("D terjadi")        # kalau A salah tapi C benar
-    else:
+else:
     print("E terjadi")        # kalau dua-duanya salah
+```
 </Callout>
 ---
 
@@ -70,7 +71,7 @@ Misal:
 4. **Tokenisasi** (ubah teks ke angka)
 
 Contoh tokenisasi sederhana:
-```bash
+```bash {1-2}
 Teks: "Hello World!"
 Token: ['5021', '7123']
 
@@ -113,7 +114,7 @@ Bayangin kamu ngajarin AI kayak ngajarin anak kecil nulis karangan.
 
 #### Training Loop Sederhana:
 
-```python title="python.py"
+```python title="python,py" add={1} {2-5}
 for epoch in range(epochs):
     for batch in data:
         y_pred = model(batch)
@@ -182,7 +183,7 @@ Prediksi:
 → "banget"
 ```
 
-![Flow AI memprediksi](https://raw.githubusercontent.com/dair-ai/ml-visuals/refs/heads/master/1.png)
+![Flow AI memprediksi](https://www.nicepng.com/png/full/880-8805864_neural-networks-are-a-set-of-algorithms-which.png)
 
 ---
 
