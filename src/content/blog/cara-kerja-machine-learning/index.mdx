@@ -11,16 +11,16 @@ import Callout from '@/components/Callout.astro'
 
 # Cara Kerja Machine Learning Seperti ChatGPT, Claude, dan Gemini  
 
-Pernah gak sih kamu mikir, gimana caranya AI kayak ChatGPT dan Claude bisa nyusun kalimat dengan rapi, jawab pertanyaan, bahkan bisa nyeritain kisah yang emosional banget seolah-olah “hidup”?  Atau gimana bisa AI kayak Midjourney dan DALL·E ngebuat gambar cuma dari teks, dan AI kayak Sora dan Veo yang bisa bikin video, atau mungkin Suno dan Udio yang bisa bikin musik yang terdengar *asli banget*?  Jawabannya: semuanya berawal dari **machine learning** — lebih tepatnya **deep learning**.
+Pernah gak sih kamu mikir, gimana caranya AI kayak ChatGPT dan Claude bisa nyusun kalimat dengan rapi, jawab pertanyaan, bahkan bisa nyeritain kisah yang emosional banget seolah-olah seperti makhluk “hidup”?  Atau gimana bisa AI kayak Midjourney dan DALL·E ngebuat gambar cuma dari teks, dan AI kayak Sora dan Veo yang bisa bikin video, atau mungkin Suno dan Udio yang bisa bikin musik yang terdengar *asli banget*?  Jawabannya: semuanya berawal dari **machine learning** — lebih tepatnya **deep learning**.
 
-Yuk, kita bedah satu-satu. Tapi santai aja, aku bakal jelasin kayak ngobrol sama temen nongkrong.
+Kali ini aku akan bedah satu-satu bagaimana teknisnya AI ini bekerja secara detail. Tapi santai aja, aku bakal jelasin secara gampang dan general.
 
 ---
 
-## 1. Dasar Konsep Machine Learning
+## 1. Konsep Dasar Machine Learning
 
-Machine Learning (ML) itu intinya: **mesin belajar dari data**.  
-Alih-alih dikasih instruksi satu-satu kayak “kalau A maka B”, ML justru dikasih **banyak contoh** dan disuruh **nemuin polanya sendiri**.
+Machine Learning atau kita singkat aja jadi ML, itu intinya: **mesin yang belajar dari data**.  
+Alih-alih dikasih instruksi satu-satu kayak “kalau permintaannya A maka jawabannya B”, ML justru dikasih **banyak contoh** dan disuruh **nemuin polanya sendiri**.
 
 Contoh:
 - Kalau kamu kasih ribuan foto kucing dan anjing, AI bakal belajar bedain keduanya.
@@ -30,14 +30,14 @@ Contoh:
 Intinya, ML = <kbd>Data</kbd> + <kbd>Algoritma</kbd> + <kbd>Komputasi</kbd>
 </Callout>
 
-| `Komponen` | `Penjelasan` |
-|-----------|--------------------|
-| <kbd>**Data**</kbd> | Contoh-contoh yang dipelajari mesin (teks, gambar, suara, dll) |
-| <kbd>**Model/Arsitektur**</kbd> | “Otak” AI yang memproses data dan belajar pola |
-| <kbd>**Training**</kbd> | Proses melatih AI agar ngerti pola dari data |
-| <kbd>**Parameter**</kbd> | Angka-angka internal yang AI ubah selama belajar |
-| <kbd>**Loss Function**</kbd> | Cara mengukur seberapa “bodoh” AI saat ini |
-| <kbd>**Optimizer**</kbd> | Algoritma yang bantu AI jadi “lebih pintar” tiap langkah |
+| Komponen                        | Penjelasan                                                                       |
+| ------------------------------- | -------------------------------------------------------------------------------- |
+| <kbd>**Data**</kbd>             | Gambar, teks, video, dan audio.                                                  |
+| <kbd>**Model Arsitektur**</kbd> | Otak AI yang memproses data dan belajar pola dari data                           |
+| <kbd>**Training**</kbd>         | Proses melatih AI agar ngerti pola dari data                                     |
+| <kbd>**Parameter**</kbd>        | Angka-angka internal yang AI ubah selama belajar sekaligus menjadi "ingatan"-nya |
+| <kbd>**Loss Function**</kbd>    | Cara mengukur seberapa “bodoh” AI saat ini                                       |
+| <kbd>**Optimizer**</kbd>        | Algoritma yang bantu AI jadi “lebih pintar” di tiap langkahnya                   |
 
 <Callout variant='important'>
 Jadi cara kerja Machine Learning bukan diberi perintah kayak gini:
@@ -51,31 +51,46 @@ elif C:
 else:
     print("E terjadi")        # kalau dua-duanya salah
 ```
+Cara kerja ML lebih gila dan lebih rumit daripada itu.
 </Callout>
 ---
 
-## 2. Dari Data ke Pengetahuan: Dataset Itu Segalanya
+## 2. AI Mengubah Dataset Mejadi Pengetahuan
 
-AI gak bisa belajar tanpa **dataset**.  
-Dataset adalah bahan mentahnya.
+`"AI gak bisa belajar tanpa **dataset**".`
+Dataset adalah dasar dari pengetahuan AI.
 
 Misal:
-- ChatGPT → teks dari buku, web, forum, dan dataset kurasi (Common Crawl, Wikipedia, arXiv)
-- Midjourney / DALL·E → gambar dengan caption deskriptif
-- Suno / Udio → file audio + lirik + metadata musik
+- ChatGPT / Claude mengambil teks dari buku, web, forum, internet, dan dataset kurasi (Common Crawl, Wikipedia, arXiv)
+- Midjourney / DALL·E mengambil ribuan bahkan jutaan gambar dari internet
+- Suno / Udio mengambil file audio + lirik + metadata musik
 
 #### Proses Dataset:
-1. **Kumpulin data** (bisa ratusan terabyte)
-2. **Bersihin data** (hapus spam, iklan, teks rusak)
-3. **Normalisasi** (misal ubah semua ke format teks UTF-8)
-4. **Tokenisasi** (ubah teks ke angka)
+1. **Kumpulin data sebanyak mungkin**: _Ukurannya bisa tembus ratusan terabyte_
+2. **Bersihin data**: _Hapus spam, iklan, teks rusak, pornografi, kekerasan, pelecehan_
+3. **Normalisasi**" _Misal ubah semua ke format teks UTF-8_
+4. **Tokenisasi**: _Ubah teks ke angka yang mudah diingat atau diproses AI_
+
+###### Q&A
+1. **Kenapa data harus banyak?**  _Karena semakin besar dataset, semakin pintar AI_
+2. **Kenapa data harus dibersihkan?** _Karena sebagian besar dataset diambil dari internet—bahkan mungkin aja ambil data dari Darkweb. Jadi bisa saja ada data berbahaya atau hoax yang secara tidak sengaja diambil. Bayangin kalau AI belajar dari data berbahaya itu, mungkin ChatGPT bisa tiba-tiba kirim: "Berikut alat dan bahan merakit b*m panci"_
+3. **Kenapa dataset harus di-normalisasi?** _Biar datanya memiliki format yang sama. Tujuannya agar AI gak bingung saat pelatihan_
+4. **Kenapa data harus di-tokenisasi?** _Karena itu diperlukan biar proses training AI bisa efisien dan gak boros sumberdaya komputasi_
 
 Contoh tokenisasi sederhana:
-```bash {1-2}
-Teks: "Hello World!"
-Token: ['5021', '7123']
+```bash {1-2} add-{4-5}
+text: "Selamat Pagi Semuanya!"
+token: ['5021', '7123']
 
+text: "Hello World"
+token: ['82']
 ````
+
+Jadi tokenisasi itu secara kasar adalah supaya saat berpikir, AI gak akan kewalahan untuk memproses data. Alih-alih memikirkan kalimat "Hello World", AI akan memikirkan 82 sebagai gantinya. 
+
+Jadi ketika AI berpikir tentang kalimat _"Selamat Pagi Semuanya! Hello World"_ maka berkat tokenisasi, AI cuman akan berpikir ['5021', 7123', '82].
+
+Lihat kan bedanya? Dari yang awalnya 5 kata, berubah jadi 3 blok angka. Itu efisien banget.
 
 ---
 
@@ -83,21 +98,23 @@ Token: ['5021', '7123']
 ![Saraf AI](https://www.nicepng.com/png/full/880-8805864_neural-networks-are-a-set-of-algorithms-which.png)
 
 AI modern kayak ChatGPT, Claude, dan Gemini pakai **transformer architecture**.  
-Ini bukan Optimus Prime, tapi prinsip dasarnya mirip: **semuanya bekerja paralel dan efisien**.
+Ini maksudnya bukan Optimus Prime, tapi prinsip dasarnya mirip: **semuanya bekerja paralel dan efisien**.
 
 ### Gambaran Kasar Arsitektur Transformer
 
-<kbd>Input Teks</kbd> > <kbd>Embedding Layer</kbd> > <kbd>Multi-Head Attention</kbd> > <kbd>Feed Forward Network</kbd> > <kbd>Normalization</kbd> > <kbd>Output Token</kbd>
+<kbd>Input Teks</kbd> → <kbd>Embedding Layer</kbd> → <kbd>Multi-Head Attention</kbd> → <kbd>Feed Forward Network</kbd> → <kbd>Normalization</kbd> → <kbd>Output Token</kbd>
 
 Setiap “blok” ini bisa terdiri dari **miliaran parameter**, dan diulang ratusan kali.
 
 #### Komponen Utama:
 
-* **Embedding Layer**: ubah kata jadi vektor angka (representasi makna)
-* **Self-Attention**: lihat konteks kata lain di kalimat (ini yang bikin AI “ngerti konteks”)
-* **Feed Forward**: proses internal non-linear (tempat AI “berpikir”)
+* **Embedding Layer**: ubah kata jadi vektor angka *(representasi makna)*
+* **Self-Attention**: lihat konteks kata lain di kalimat *(ini yang bikin AI ngerti konteks)*
+* **Feed Forward**: proses internal non-linear *(tempat AI berpikir)*
 * **Layer Normalization**: jaga kestabilan selama training
 * **Output Layer**: hasilkan prediksi token berikutnya
+
+Pusing ya? Jangan dipikirin. Cukup diketahui aja, soalnya ini masalah teknis mendalam yang cuman dipikirkan oleh engineer. Kalo tertarik mau bikin AI boleh aja dipelajari lebih dalam lagi.
 
 ---
 
@@ -108,9 +125,9 @@ Bayangin kamu ngajarin AI kayak ngajarin anak kecil nulis karangan.
 1. Kasih contoh kalimat:
    `"Aku suka makan bakso karena..."`
 2. AI tebak kata berikutnya: `"pedas"`
-3. Cek jawaban, bandingin dengan kebenaran: `"enak"`
+3. Cek jawaban, bandingin dengan kalimat yang benar: `"enak"`
 4. Hitung **loss** (seberapa jauh tebakan dari kebenaran)
-5. Koreksi bobot (parameter) pakai **backpropagation**
+5. Koreksi **parameter** (bobot) pakai **backpropagation**
 6. Ulangi jutaan kali sampai hasilnya bagus
 
 #### Training Loop Sederhana:
@@ -122,6 +139,8 @@ for epoch in range(epochs):
         loss = criterion(y_pred, y_true)
         optimizer.step(loss)
 ```
+
+Jadi yang di atas itu contoh codingan engineer buat ngelatih AI. Jadi ngelatih AI bukan kayak ngajarin anak kecil belajar membaca beneran, tapi memberi perintah pada model AI buat belajar sendiri dari dataset yang diberikan.
 
 ---
 
@@ -152,14 +171,14 @@ $$
 
 ## 6. Epoch, Step, dan Batch Size
 
-| `Istilah`   | `Arti`                                     | `Analogi`                    |
-| --------- | ---------------------------------------- | -------------------------- |
-| <kbd>**Epoch**</kbd> | 1 kali seluruh dataset dipelajari        | Satu semester sekolah      |
-| <kbd>**Batch**</kbd> | Sekumpulan data kecil dalam satu iterasi | 1 kelas pelajaran          |
-| <kbd>**Step**</kbd>  | Satu update parameter                    | 1 kali belajar dalam kelas |
+| `Istilah`            | `Arti`                                   | `Analogi sekolah`         |
+| -------------------- | ---------------------------------------- | ------------------------- |
+| <kbd>**Epoch**</kbd> | 1 kali seluruh dataset dipelajari        | Belajar satu semester     |
+| <kbd>**Batch**</kbd> | Sekumpulan data kecil dalam satu iterasi | 1 hari belajar di sekolah |
+| <kbd>**Step**</kbd>  | Satu update parameter                    | 1 jam mata pelajaran      |
 
 <Callout variant="tip">
-    Misal: dataset 1 juta teks, batch size 1000, berarti 1000 step = 1 epoch.
+    Misal: dataset-nya ada 1 juta teks terus batch sizenya dihitung 1000, berarti 1000 step = 1 epoch.
 </Callout>
 ---
 
