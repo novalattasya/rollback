@@ -57,8 +57,7 @@ Cara kerja ML lebih gila dan lebih rumit daripada itu.
 
 ## 2. AI Mengubah Dataset Mejadi Pengetahuan
 
-`"AI gak bisa belajar tanpa **dataset**".`
-Dataset adalah dasar dari pengetahuan AI.
+*"AI gak bisa belajar tanpa **dataset**".* Dataset adalah dasar dari pengetahuan AI.
 
 Misal:
 - ChatGPT / Claude mengambil teks dari buku, web, forum, internet, dan dataset kurasi (Common Crawl, Wikipedia, arXiv)
@@ -78,7 +77,7 @@ Misal:
 4. **Kenapa data harus di-tokenisasi?** _Karena itu diperlukan biar proses training AI bisa efisien dan gak boros sumberdaya komputasi_
 
 Contoh tokenisasi sederhana:
-```bash {1-2} add-{4-5}
+```bash {1-2} add={4-5}
 text: "Selamat Pagi Semuanya!"
 token: ['5021', '7123']
 
@@ -118,19 +117,39 @@ Pusing ya? Jangan dipikirin. Cukup diketahui aja, soalnya ini masalah teknis men
 
 ---
 
-## 4. Proses Training — “Sekolahnya” AI
+## 4. Proses Training — Proses melatih AI
 
 Bayangin kamu ngajarin AI kayak ngajarin anak kecil nulis karangan.
 
-1. Kasih contoh kalimat:
-   `"Aku suka makan bakso karena..."`
-2. AI tebak kata berikutnya: `"pedas"`
-3. Cek jawaban, bandingin dengan kalimat yang benar: `"enak"`
-4. Hitung **loss** (seberapa jauh tebakan dari kebenaran)
-5. Koreksi **parameter** (bobot) pakai **backpropagation**
+1. Kamu kasih contoh kalimat pertanyaan:
+   `"Orang Indonesia suka makan bakso karena...?"`
+2. AI tebak kata berikutnya dengan membandingkannya dengan dataset lain. Misal dalam dataset ada kalimat:
+```mdx showLineNumbers=false
+Orang indonesia sangat suka makanan pedas
+Makanan Indonesia semuanya enak, terutama bakso
+```
+3. Maka AI akan melihat pola kalimat dari pertanyaan <kbd>1</kbd> berdasarkan semua kalimat yang ada di dataset, kemudian memberikan tebakan jawaban misalnya: `"Orang Indonesia suka makan bakso karena pedas"`  
+4. AI akan cek jawaban, bandingin dengan kalimat yang benar: `"Orang Indonesia suka makan bakso karena enak"`
+4. Algoritma akan hitung **loss** / seberapa jauh tebakan dari kebenaran
+5. Algoritma kemudian koreksi **parameter** (bobot/ingatan) pakai **backpropagation** untuk simpan tebakan yang benar, yaitu: `"Orang Indonesia suka makan bakso karena enak"`
 6. Ulangi jutaan kali sampai hasilnya bagus
 
-#### Training Loop Sederhana:
+<Callout variant="note">
+AI akan belajar (Training) sendiri dari dataset. AI akan secara mandiri belajar pola, ngecek jawaban, hitung loss, koreksi parameter, dll. Jadi kalo kamu ngelatih AI, kamu tinggal duduk manis nunggu AI selesai belajar. Analoginya mirip kayak guru sekolah yang cuman memberikan buku paket (dataset) dan nyuruh murid belajar sendiri. Kalo murid udah selesai belajar (Training), guru tinggal memberikan tugas.
+</Callout>
+
+#### Contoh Dataset
+
+<iframe
+  src="https://huggingface.co/datasets/lv2/Indonesia_LLama/embed/viewer/default/train"
+  frameborder="0"
+  width="100%"
+  height="560px"
+></iframe>
+
+*Di atas adalah dataset yang aku buat untuk melatih AI LLama (LLM). Aku sudah membagikannya di [HuggingFace](https://huggingface.co/datasets/lv2/Indonesia_LLama), kamu bisa lihat atau download untuk dipelajari lebih lanjut.*
+
+#### Contoh Training Loop Sederhana:
 
 ```python title="python,py" add={1} {2-5}
 for epoch in range(epochs):
@@ -140,7 +159,7 @@ for epoch in range(epochs):
         optimizer.step(loss)
 ```
 
-Jadi yang di atas itu contoh codingan engineer buat ngelatih AI. Jadi ngelatih AI bukan kayak ngajarin anak kecil belajar membaca beneran, tapi memberi perintah pada model AI buat belajar sendiri dari dataset yang diberikan.
+Jadi yang di atas itu contoh codingan buat ngelatih AI dari dataset yang sudah disiapkan. Jadi ngelatih AI khususnya LLM, bukan kayak ngajarin anak kecil belajar membaca beneran, tapi memberi perintah pada model AI buat belajar sendiri dari dataset yang diberikan.
 
 ---
 
@@ -209,7 +228,7 @@ Prediksi:
 
 ## 8. Gimana AI Bisa Bikin Gambar, Musik, dan Video?
 
-Walaupun semua berbasis *machine learning*, tiap domain punya pendekatan beda:
+Walaupun semua berbasis *machine learning*, tiap domain punya pendekatan beda. Jadi cara melatih AI yang bisa bikin gambar, video, dan musik itu berbeda dengan melatih AI berbasis teks (LLM) kayak ChatGPT, Claude, dan Gemini. Tapi meski begitu, intinya sama: `Berikan dataset, dan AI akan belajar sendiri.`
 
 | Jenis AI                | Arsitektur Umum                  | Contoh Model                         |
 | ----------------------- | -------------------------------- | ------------------------------------ |
@@ -231,6 +250,10 @@ x_{t-1} = \frac{1}{\sqrt{\alpha_t}} (x_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\a
 $$
 
 Jangan pusing, intinya AI belajar "ngapus noise" dengan cerdas.
+
+#### Contoh Dataset Untuk Melatih AI Generate Gambar
+
+
 
 ---
 
